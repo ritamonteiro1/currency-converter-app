@@ -1,7 +1,7 @@
-import 'package:currencyconverter_app/generated/l10n.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constant_images.dart';
+import '../../generated/l10n.dart';
 import 'currency_custom_text_field.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,6 +17,11 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: Colors.black,
         appBar: AppBar(
           title: Text(S.of(context).homeScreenCurrencyConverterText),
+          leading: const Image(
+            image: AssetImage(
+              ConstantImages.logoIoasys,
+            ),
+          ),
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(

@@ -1,3 +1,4 @@
+import 'package:currencyconverter_app/constants/constant_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
@@ -14,6 +15,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
           fontFamily: ConstantFonts.poppinsRegular,
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+            primary: ConstantColor.primaryColor,
+          ),
         ),
         home: const HomeScreen(),
         localizationsDelegates: const [
