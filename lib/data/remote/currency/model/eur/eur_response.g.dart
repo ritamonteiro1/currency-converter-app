@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'ibovespa_response.dart';
+part of 'eur_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-IbovespaResponse _$IbovespaResponseFromJson(Map<String, dynamic> json) {
-  return IbovespaResponse(
+EurResponse _$EurResponseFromJson(Map<String, dynamic> json) {
+  return EurResponse(
     name: json['name'] as String?,
-    location: json['location'] as String?,
-    points: (json['points'] as num?)?.toDouble(),
+    buy: (json['buy'] as num?)?.toDouble(),
+    sell: (json['sell'] as num?)?.toDouble(),
     variation: (json['variation'] as num?)?.toDouble(),
   );
 }
 
-Map<String, dynamic> _$IbovespaResponseToJson(IbovespaResponse instance) =>
+Map<String, dynamic> _$EurResponseToJson(EurResponse instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'location': instance.location,
-      'points': instance.points,
+      'buy': instance.buy,
+      'sell': instance.sell,
       'variation': instance.variation,
     };

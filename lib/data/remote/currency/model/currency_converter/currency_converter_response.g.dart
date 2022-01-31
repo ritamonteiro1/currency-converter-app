@@ -1,24 +1,26 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'converter_response.dart';
+part of 'currency_converter_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-ConverterResponse _$ConverterResponseFromJson(Map<String, dynamic> json) {
-  return ConverterResponse(
+CurrencyConverterResponse _$CurrencyConverterResponseFromJson(
+    Map<String, dynamic> json) {
+  return CurrencyConverterResponse(
     by: json['by'] as String?,
     validKey: json['valid_key'] as bool?,
     result: json['result'] == null
         ? null
         : ResultResponse.fromJson(json['result'] as Map<String, dynamic>),
-    executionTime: json['execution_time'] as int?,
+    executionTime: (json['execution_time'] as num?)?.toDouble(),
     fromCache: json['from_cache'] as bool?,
   );
 }
 
-Map<String, dynamic> _$ConverterResponseToJson(ConverterResponse instance) =>
+Map<String, dynamic> _$CurrencyConverterResponseToJson(
+        CurrencyConverterResponse instance) =>
     <String, dynamic>{
       'by': instance.by,
       'valid_key': instance.validKey,

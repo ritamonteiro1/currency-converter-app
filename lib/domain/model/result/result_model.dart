@@ -1,15 +1,10 @@
-import '../stocks/stocks_model.dart';
-
 import '../currency/currency_model.dart';
 
 class ResultModel {
   ResultModel({
-    required this.currency,
-    required this.stocks,
-    required this.availableSources,
+    required this.currencies,
+    required this.taxes,
   });
-
-  final CurrencyModel currency;
-  final StocksModel stocks;
-  final List<String> availableSources;
+  final CurrencyModel? currencies;
+  final dynamic taxes;
 }

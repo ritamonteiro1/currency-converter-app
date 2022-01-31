@@ -1,5 +1,5 @@
-class UsdModel {
-  UsdModel({
+class EurModel {
+  EurModel({
     required this.name,
     required this.buy,
     required this.sell,

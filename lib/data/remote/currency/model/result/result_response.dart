@@ -1,5 +1,6 @@
+
+
 import '../currency/currency_response.dart';
-import '../stocks/stocks_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'result_response.g.dart';
@@ -7,17 +8,15 @@ part 'result_response.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class ResultResponse {
   ResultResponse({
-    this.currency,
-    this.stocks,
-    this.availableSources,
+    required this.currencies,
+    required this.taxes,
   });
 
   factory ResultResponse.fromJson(Map<String, dynamic> json) =>
       _$ResultResponseFromJson(json);
 
-  final CurrencyResponse? currency;
-  final StocksResponse? stocks;
-  final List<String>? availableSources;
-
+  final CurrencyResponse? currencies;
+  final dynamic taxes;
   Map<String, dynamic> toJson() => _$ResultResponseToJson(this);
+
 }
