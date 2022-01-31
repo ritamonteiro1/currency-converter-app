@@ -7,6 +7,6 @@ class CurrencyModel {
     required this.eur,
   });
 
-  final UsdModel usd;
-  final EurModel eur;
+  UsdModel usd;
+  EurModel eur;
 }

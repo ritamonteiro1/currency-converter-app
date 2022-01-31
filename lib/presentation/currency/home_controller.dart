@@ -8,8 +8,8 @@ class HomeController {
 
   final GetCurrencyUseCaseImpl getCurrencyUseCase;
 
-  Future<CurrencyModel> getCurrency() async {
-    final currency = await getCurrencyUseCase.getCurrency();
+  Future<CurrencyModel> getCurrency(double value) async {
+    final currency = await getCurrencyUseCase.getCurrency(value);
     return currency;
   }
 }

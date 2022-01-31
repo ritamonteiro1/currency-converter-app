@@ -11,5 +11,6 @@ class CurrencyRepositoryImpl implements CurrencyRepository {
   final CurrencyRemoteDataSource currencyRemoteDataSource;
 
   @override
-  Future<CurrencyModel> getCurrency() => currencyRemoteDataSource.getCurrency();
+  Future<CurrencyModel> getCurrency(double value) =>
+      currencyRemoteDataSource.getCurrency(value);
 }

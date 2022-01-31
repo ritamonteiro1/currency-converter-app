@@ -1,4 +1,4 @@
-import 'package:currencyconverter_app/domain/model/currency/currency_model.dart';
+import '../../domain/model/currency/currency_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -24,6 +24,9 @@ class _HomeScreenState extends State<HomeScreen> {
   late CurrencyRepository currencyRepository;
   late GetCurrencyUseCaseImpl getCurrencyUseCase;
   late HomeController homeController;
+  late CurrencyModel currencyModel;
+  double? eur;
+  double? dollar;
 
   @override
   void initState() {
@@ -34,9 +37,16 @@ class _HomeScreenState extends State<HomeScreen> {
     homeController = HomeController(getCurrencyUseCase);
   }
 
-  Future<CurrencyModel> getCurrency() async {
-    final currency = await homeController.getCurrency();
-    return currency;
+  Future<void> getCurrency(double real) async {
+    currencyModel = await homeController.getCurrency(real);
+    setCurrencies(currencyModel);
+  }
+
+  void setCurrencies(CurrencyModel currencyModel) {
+    setState(() {
+      eur = currencyModel.eur.buy;
+      dollar = currencyModel.usd.buy;
+    });
   }
 
   @override
@@ -69,6 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
+                  onChanged: getCurrency,
                 ),
                 const SizedBox(
                   height: 35,
@@ -76,6 +87,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
+                  onChanged: getCurrency,
+                  value: dollar,
                 ),
                 const SizedBox(
                   height: 35,
@@ -83,6 +96,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
+                  onChanged: getCurrency,
+                  value: eur,
                 ),
               ],
             ),

@@ -16,7 +16,7 @@ class CurrencyRemoteDataSourceImpl implements CurrencyRemoteDataSource {
   static const _baseUrl = 'https://api.hgbrasil.com/finance?format=json';
 
   @override
-  Future<CurrencyModel> getCurrency() async {
+  Future<CurrencyModel> getCurrency(double value) async {
     try {
       final response = await _dio.get(_baseUrl);
       final currencyConverterResponse =
@@ -25,6 +25,8 @@ class CurrencyRemoteDataSourceImpl implements CurrencyRemoteDataSource {
       final currencyResponse = resultResponse?.currency;
       final currencyModel = currencyResponse?.toCurrencyModel();
       if (currencyModel != null) {
+        currencyModel.eur.buy = currencyModel.eur.buy * value;
+        currencyModel.usd.buy = currencyModel.usd.buy * value;
         return currencyModel;
       } else {
         throw NullResponseException();

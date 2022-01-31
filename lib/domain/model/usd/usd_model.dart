@@ -3,5 +3,5 @@ class UsdModel {
     required this.buy,
   });
 
-  final double? buy;
+  double buy;
 }

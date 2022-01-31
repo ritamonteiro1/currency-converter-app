@@ -11,5 +11,6 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
   final CurrencyRepository currencyRepository;
 
   @override
-  Future<CurrencyModel> getCurrency() => currencyRepository.getCurrency();
+  Future<CurrencyModel> getCurrency(double value) =>
+      currencyRepository.getCurrency(value);
 }

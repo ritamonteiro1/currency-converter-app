@@ -1,16 +1,50 @@
 import 'package:flutter/material.dart';
 
-class CurrencyCustomTextField extends StatelessWidget {
+typedef OnChanged = void Function(double value);
+
+class CurrencyCustomTextField extends StatefulWidget {
   const CurrencyCustomTextField({
     required this.labelText,
     required this.prefix,
+    required this.onChanged,
+    this.value,
     Key? key,
   }) : super(key: key);
   final String labelText;
   final String prefix;
+  final OnChanged onChanged;
+  final double? value;
+
+  @override
+  State<CurrencyCustomTextField> createState() =>
+      _CurrencyCustomTextFieldState();
+}
+
+class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
+  final _textEditingController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value != null) {
+      _textEditingController.text = widget.value.toString();
+    }
+    _textEditingController.addListener(() {
+      if (_textEditingController.text.isNotEmpty) {
+        widget.onChanged(double.parse(_textEditingController.text));
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => TextField(
+        onChanged: (value) {},
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,
         ),
@@ -18,10 +52,10 @@ class CurrencyCustomTextField extends StatelessWidget {
           color: Colors.white,
         ),
         decoration: InputDecoration(
-          labelText: labelText,
+          labelText: widget.labelText,
           labelStyle: const TextStyle(color: Colors.white),
           prefix: Text(
-            prefix,
+            widget.prefix,
             style: const TextStyle(
               color: Colors.white,
             ),
