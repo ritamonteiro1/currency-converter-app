@@ -8,15 +8,13 @@ part of 'result_response.dart';
 
 ResultResponse _$ResultResponseFromJson(Map<String, dynamic> json) {
   return ResultResponse(
-    currencies: json['currencies'] == null
+    currency: json['currency'] == null
         ? null
-        : CurrencyResponse.fromJson(json['currencies'] as Map<String, dynamic>),
-    taxes: json['taxes'],
+        : CurrencyResponse.fromJson(json['currency'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$ResultResponseToJson(ResultResponse instance) =>
     <String, dynamic>{
-      'currencies': instance.currencies,
-      'taxes': instance.taxes,
+      'currency': instance.currency,
     };

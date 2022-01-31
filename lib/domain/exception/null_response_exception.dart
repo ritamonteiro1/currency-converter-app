@@ -1,0 +1,1 @@
+class NullResponseException implements Exception {}
