@@ -1,0 +1,10 @@
+{
+  "@@ locale": "es",
+  "homeScreenCurrencyConverterText": "Currency converter",
+  "homeScreenRealLabelTextField": "Reais",
+  "homeScreenDollarsLabelTextField": "Dollars",
+  "homeScreenEurosLabelTextField": "Euros",
+  "homeScreenRealPrefixTextField": "R$",
+  "homeScreenDollarsPrefixTextField": "US$",
+  "homeScreenEurosPrefixTextField": "€"
+}

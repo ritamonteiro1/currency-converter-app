@@ -1,3 +1,5 @@
-App flutter 'Conversor de moedas'
+(em andamento) 
+App flutter 'Conversor de moedas' ioasys Camp
 
-ioasys Camp
+Este app contém uma tela:
+1. Tela que permite realizar conversão de moedas.
