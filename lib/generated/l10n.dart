@@ -90,30 +90,30 @@ class S {
     );
   }
 
-  /// `R$`
+  /// `R$ `
   String get homeScreenRealPrefixTextField {
     return Intl.message(
-      'R\$',
+      'R\$ ',
       name: 'homeScreenRealPrefixTextField',
       desc: '',
       args: [],
     );
   }
 
-  /// `US$`
+  /// `US$ `
   String get homeScreenDollarsPrefixTextField {
     return Intl.message(
-      'US\$',
+      'US\$ ',
       name: 'homeScreenDollarsPrefixTextField',
       desc: '',
       args: [],
     );
   }
 
-  /// `€`
+  /// `€ `
   String get homeScreenEurosPrefixTextField {
     return Intl.message(
-      '€',
+      '€ ',
       name: 'homeScreenEurosPrefixTextField',
       desc: '',
       args: [],
