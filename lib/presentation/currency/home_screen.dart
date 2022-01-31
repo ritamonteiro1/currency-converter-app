@@ -1,8 +1,16 @@
+import 'package:currencyconverter_app/domain/model/currency/currency_model.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constant_images.dart';
+import '../../data/remote/currency/data_source/currency_remote_data_source.dart';
+import '../../data/remote/currency/data_source/currency_remote_data_source_impl.dart';
+import '../../domain/repository/currency/currency_repository.dart';
+import '../../domain/repository/currency/currency_repository_impl.dart';
+import '../../domain/use_case/get_currency_use_case.dart';
 import '../../generated/l10n.dart';
 import 'currency_custom_text_field.dart';
+import 'home_controller.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,6 +20,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late CurrencyRemoteDataSource currencyRemoteDataSource;
+  late CurrencyRepository currencyRepository;
+  late GetCurrencyUseCaseImpl getCurrencyUseCase;
+  late HomeController homeController;
+
+  @override
+  void initState() {
+    super.initState();
+    currencyRemoteDataSource = CurrencyRemoteDataSourceImpl(Dio());
+    currencyRepository = CurrencyRepositoryImpl(currencyRemoteDataSource);
+    getCurrencyUseCase = GetCurrencyUseCaseImpl(currencyRepository);
+    homeController = HomeController(getCurrencyUseCase);
+  }
+
+  Future<CurrencyModel> getCurrency() async {
+    final currency = await homeController.getCurrency();
+    return currency;
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.black,
