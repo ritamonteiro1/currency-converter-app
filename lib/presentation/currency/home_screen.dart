@@ -1,4 +1,5 @@
 import 'package:currencyconverter_app/domain/model/currency_result/currency_result.dart';
+import 'package:currencyconverter_app/domain/use_case/get_currency_use_case.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   late CurrencyRemoteDataSource currencyRemoteDataSource;
   late CurrencyRepository currencyRepository;
-  late GetCurrencyUseCaseImpl getCurrencyUseCase;
+  late GetCurrencyUseCase getCurrencyUseCase;
   late HomeController homeController;
   late CurrencyModel currencyModel;
 
