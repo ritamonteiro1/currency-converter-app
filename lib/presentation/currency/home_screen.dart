@@ -58,10 +58,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getCurrency(
-    double real,
+    double typedValue,
     CurrencyType currencyType,
   ) async {
-    final currencyResult = await homeController.getCurrency(real, currencyType);
+    final currencyResult =
+        await homeController.getCurrency(typedValue, currencyType);
     setCurrencies(currencyResult);
   }
 

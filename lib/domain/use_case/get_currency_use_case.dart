@@ -3,7 +3,7 @@ import 'package:currencyconverter_app/domain/model/currency_type/currency_type.d
 
 mixin GetCurrencyUseCase {
   Future<CurrencyResult> getCurrency(
-    double value,
+    double typedValue,
     CurrencyType currencyType,
   );
 }

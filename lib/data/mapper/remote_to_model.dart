@@ -5,7 +5,7 @@ extension CurrencyResponseToCurrencyModel on CurrencyResponse {
   static const doubleForNullResponse = -1.0;
 
   CurrencyModel toCurrencyModel() => CurrencyModel(
-        dollar: USD?.buy ?? doubleForNullResponse,
-        euro: EUR?.buy ?? doubleForNullResponse,
+        dollarInReal: USD?.buy ?? doubleForNullResponse,
+        euroInReal: EUR?.buy ?? doubleForNullResponse,
       );
 }

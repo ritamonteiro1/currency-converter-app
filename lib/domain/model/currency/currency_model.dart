@@ -1,9 +1,9 @@
 class CurrencyModel {
   CurrencyModel({
-    required this.dollar,
-    required this.euro,
+    required this.dollarInReal,
+    required this.euroInReal,
   });
 
-  double dollar;
-  double euro;
+  double dollarInReal;
+  double euroInReal;
 }

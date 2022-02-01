@@ -14,47 +14,51 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
 
   @override
   Future<CurrencyResult> getCurrency(
-      double value, CurrencyType currencyType) async {
+      double typedValue, CurrencyType currencyType) async {
     final currencyModel = await currencyRepository.getCurrency();
-    final real = _calculateReal(value, currencyType, currencyModel);
-    final dollar = calculateDollar(value, currencyType, currencyModel);
-    final eur = calculateEuro(value, currencyType, currencyModel);
+    final real = _calculateReal(typedValue, currencyType, currencyModel);
+    final dollar = calculateDollar(typedValue, currencyType, currencyModel);
+    final eur = calculateEuro(typedValue, currencyType, currencyModel);
     return CurrencyResult(dollar: dollar, real: real, eur: eur);
   }
 
-  double _calculateReal(
-      double value, CurrencyType currencyType, CurrencyModel currencyModel) {
+  double _calculateReal(double typedValue, CurrencyType currencyType,
+      CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
-        return value;
+        return typedValue;
       case CurrencyType.dollar:
-        return value * currencyModel.dollar;
+        return typedValue * currencyModel.dollarInReal;
       case CurrencyType.euro:
-        return value * currencyModel.euro;
+        return typedValue * currencyModel.euroInReal;
     }
   }
 
-  double calculateDollar(
-      double value, CurrencyType currencyType, CurrencyModel currencyModel) {
+  double calculateDollar(double typedValue, CurrencyType currencyType,
+      CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
-        return value * currencyModel.dollar;
+        return typedValue * currencyModel.dollarInReal;
       case CurrencyType.dollar:
-        return value;
+        return typedValue;
       case CurrencyType.euro:
-        return value * currencyModel.dollar / currencyModel.euro;
+        return typedValue *
+            currencyModel.dollarInReal /
+            currencyModel.euroInReal;
     }
   }
 
-  double calculateEuro(
-      double value, CurrencyType currencyType, CurrencyModel currencyModel) {
+  double calculateEuro(double typedValue, CurrencyType currencyType,
+      CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
-        return value * currencyModel.euro;
+        return typedValue * currencyModel.euroInReal;
       case CurrencyType.dollar:
-        return value * currencyModel.euro / currencyModel.dollar;
+        return typedValue *
+            currencyModel.euroInReal /
+            currencyModel.dollarInReal;
       case CurrencyType.euro:
-        return value;
+        return typedValue;
     }
   }
 }

@@ -11,12 +11,12 @@ class HomeController {
   final GetCurrencyUseCaseImpl getCurrencyUseCase;
 
   Future<CurrencyResult> getCurrency(
-    double value,
-    CurrencyType from,
+    double typedValue,
+    CurrencyType currencyType,
   ) async {
     final currency = await getCurrencyUseCase.getCurrency(
-      value,
-      from,
+      typedValue,
+      currencyType,
     );
     return currency;
   }
