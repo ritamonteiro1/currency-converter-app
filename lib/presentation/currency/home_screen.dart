@@ -1,10 +1,11 @@
-import '../../domain/model/currency/currency_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 import '../../constants/constant_images.dart';
 import '../../data/remote/currency/data_source/currency_remote_data_source.dart';
 import '../../data/remote/currency/data_source/currency_remote_data_source_impl.dart';
+import '../../domain/model/currency/currency_model.dart';
+import '../../domain/model/currency_type/currency_type.dart';
 import '../../domain/repository/currency/currency_repository.dart';
 import '../../domain/repository/currency/currency_repository_impl.dart';
 import '../../domain/use_case/get_currency_use_case.dart';
@@ -20,33 +21,56 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  late TextEditingController _dollarTextEditingController;
+  late TextEditingController _euroTextEditingController;
+  late TextEditingController _realTextEditingController;
+
   late CurrencyRemoteDataSource currencyRemoteDataSource;
   late CurrencyRepository currencyRepository;
   late GetCurrencyUseCaseImpl getCurrencyUseCase;
   late HomeController homeController;
   late CurrencyModel currencyModel;
-  double? eur;
-  double? dollar;
 
   @override
   void initState() {
     super.initState();
+    _dollarTextEditingController = TextEditingController();
+    _euroTextEditingController = TextEditingController();
+    _realTextEditingController = TextEditingController();
+    _realTextEditingController.addListener(() {
+      if (_realTextEditingController.text.isNotEmpty) {
+        getCurrency(
+          double.parse(_realTextEditingController.text),
+          CurrencyType.real,
+        );
+      }
+    });
     currencyRemoteDataSource = CurrencyRemoteDataSourceImpl(Dio());
     currencyRepository = CurrencyRepositoryImpl(currencyRemoteDataSource);
     getCurrencyUseCase = GetCurrencyUseCaseImpl(currencyRepository);
     homeController = HomeController(getCurrencyUseCase);
   }
 
-  Future<void> getCurrency(double real) async {
-    currencyModel = await homeController.getCurrency(real);
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  Future<void> getCurrency(
+    double real,
+    CurrencyType from,
+  ) async {
+    if (from != CurrencyType.dollar) {
+      currencyModel =
+          await homeController.getCurrency(real, from, CurrencyType.dollar);
+    }
     setCurrencies(currencyModel);
   }
 
   void setCurrencies(CurrencyModel currencyModel) {
-    setState(() {
-      eur = currencyModel.eur.buy;
-      dollar = currencyModel.usd.buy;
-    });
+    _dollarTextEditingController.text = currencyModel.dollar.toStringAsFixed(2);
+    _euroTextEditingController.text = currencyModel.euro.toStringAsFixed(2);
+    _realTextEditingController.text = currencyModel.real.toStringAsFixed(2);
   }
 
   @override
@@ -79,7 +103,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
-                  onChanged: getCurrency,
+                  onChanged: (value) => getCurrency(value, CurrencyType.real),
+                  textEditingController: _realTextEditingController,
                 ),
                 const SizedBox(
                   height: 35,
@@ -87,8 +112,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
-                  onChanged: getCurrency,
-                  value: dollar,
+                  onChanged: (value) => getCurrency(value, CurrencyType.dollar),
+                  textEditingController: _dollarTextEditingController,
                 ),
                 const SizedBox(
                   height: 35,
@@ -96,8 +121,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
-                  onChanged: getCurrency,
-                  value: eur,
+                  onChanged: (value) => getCurrency(value, CurrencyType.euro),
+                  textEditingController: _euroTextEditingController,
                 ),
               ],
             ),

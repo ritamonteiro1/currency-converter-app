@@ -1,12 +1,10 @@
-import '../eur/eur_model.dart';
-import '../usd/usd_model.dart';
-
 class CurrencyModel {
   CurrencyModel({
-    required this.usd,
-    required this.eur,
+    required this.dollar,
+    required this.euro,
   });
 
-  UsdModel usd;
-  EurModel eur;
+  double dollar;
+  double euro;
+  late double real;
 }

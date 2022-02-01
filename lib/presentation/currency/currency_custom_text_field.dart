@@ -7,6 +7,7 @@ class CurrencyCustomTextField extends StatefulWidget {
     required this.labelText,
     required this.prefix,
     required this.onChanged,
+    required this.textEditingController,
     this.value,
     Key? key,
   }) : super(key: key);
@@ -14,6 +15,7 @@ class CurrencyCustomTextField extends StatefulWidget {
   final String prefix;
   final OnChanged onChanged;
   final double? value;
+  final TextEditingController? textEditingController;
 
   @override
   State<CurrencyCustomTextField> createState() =>
@@ -21,30 +23,15 @@ class CurrencyCustomTextField extends StatefulWidget {
 }
 
 class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
-  final _textEditingController = TextEditingController();
-
   @override
   void initState() {
     super.initState();
-    if (widget.value != null) {
-      _textEditingController.text = widget.value.toString();
-    }
-    _textEditingController.addListener(() {
-      if (_textEditingController.text.isNotEmpty) {
-        widget.onChanged(double.parse(_textEditingController.text));
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _textEditingController.dispose();
-    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) => TextField(
         onChanged: (value) {},
+        controller: widget.textEditingController,
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,
         ),

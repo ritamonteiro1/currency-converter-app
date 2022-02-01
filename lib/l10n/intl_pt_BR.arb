@@ -4,7 +4,7 @@
   "homeScreenRealLabelTextField": "Reais",
   "homeScreenDollarsLabelTextField": "Dólares",
   "homeScreenEurosLabelTextField": "Euros",
-  "homeScreenRealPrefixTextField": "R$",
-  "homeScreenDollarsPrefixTextField": "US$",
-  "homeScreenEurosPrefixTextField": "€"
+  "homeScreenRealPrefixTextField": "R$   ",
+  "homeScreenDollarsPrefixTextField": "US$   ",
+  "homeScreenEurosPrefixTextField": "€   "
 }

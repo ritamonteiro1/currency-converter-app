@@ -27,14 +27,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "homeScreenDollarsLabelTextField":
             MessageLookupByLibrary.simpleMessage("Dollars"),
         "homeScreenDollarsPrefixTextField":
-            MessageLookupByLibrary.simpleMessage("US\$"),
+            MessageLookupByLibrary.simpleMessage("US\$   "),
         "homeScreenEurosLabelTextField":
             MessageLookupByLibrary.simpleMessage("Euros"),
         "homeScreenEurosPrefixTextField":
-            MessageLookupByLibrary.simpleMessage("€"),
+            MessageLookupByLibrary.simpleMessage("€   "),
         "homeScreenRealLabelTextField":
             MessageLookupByLibrary.simpleMessage("Reais"),
         "homeScreenRealPrefixTextField":
-            MessageLookupByLibrary.simpleMessage("R\$")
+            MessageLookupByLibrary.simpleMessage("R\$   ")
       };
 }
