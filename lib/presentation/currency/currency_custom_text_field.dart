@@ -24,13 +24,10 @@ class CurrencyCustomTextField extends StatefulWidget {
 
 class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
   @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) => TextField(
-        onChanged: (value) {},
+        onChanged: (value) {
+          widget.onChanged(double.parse(value));
+        },
         controller: widget.textEditingController,
         keyboardType: const TextInputType.numberWithOptions(
           decimal: true,

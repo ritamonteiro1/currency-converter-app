@@ -1,3 +1,4 @@
+import 'package:currencyconverter_app/domain/model/currency_result/currency_result.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ import '../../domain/model/currency/currency_model.dart';
 import '../../domain/model/currency_type/currency_type.dart';
 import '../../domain/repository/currency/currency_repository.dart';
 import '../../domain/repository/currency/currency_repository_impl.dart';
-import '../../domain/use_case/get_currency_use_case.dart';
+import '../../domain/use_case/get_currency_use_case_impl.dart';
 import '../../generated/l10n.dart';
 import 'currency_custom_text_field.dart';
 import 'home_controller.dart';
@@ -22,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController _dollarTextEditingController;
-  late TextEditingController _euroTextEditingController;
+  late TextEditingController _eurTextEditingController;
   late TextEditingController _realTextEditingController;
 
   late CurrencyRemoteDataSource currencyRemoteDataSource;
@@ -35,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _dollarTextEditingController = TextEditingController();
-    _euroTextEditingController = TextEditingController();
+    _eurTextEditingController = TextEditingController();
     _realTextEditingController = TextEditingController();
     _realTextEditingController.addListener(() {
       if (_realTextEditingController.text.isNotEmpty) {
@@ -58,19 +59,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Future<void> getCurrency(
     double real,
-    CurrencyType from,
+    CurrencyType currencyType,
   ) async {
-    if (from != CurrencyType.dollar) {
-      currencyModel =
-          await homeController.getCurrency(real, from, CurrencyType.dollar);
-    }
-    setCurrencies(currencyModel);
+    final currencyResult = await homeController.getCurrency(real, currencyType);
+    setCurrencies(currencyResult);
   }
 
-  void setCurrencies(CurrencyModel currencyModel) {
-    _dollarTextEditingController.text = currencyModel.dollar.toStringAsFixed(2);
-    _euroTextEditingController.text = currencyModel.euro.toStringAsFixed(2);
-    _realTextEditingController.text = currencyModel.real.toStringAsFixed(2);
+  void setCurrencies(CurrencyResult currencyResult) {
+    _dollarTextEditingController.text =
+        currencyResult.dollar.toStringAsFixed(2);
+    _eurTextEditingController.text = currencyResult.eur.toStringAsFixed(2);
+    _realTextEditingController.text = currencyResult.real.toStringAsFixed(2);
   }
 
   @override
@@ -122,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
                   onChanged: (value) => getCurrency(value, CurrencyType.euro),
-                  textEditingController: _euroTextEditingController,
+                  textEditingController: _eurTextEditingController,
                 ),
               ],
             ),

@@ -1,7 +1,7 @@
+import 'package:currencyconverter_app/domain/model/currency_result/currency_result.dart';
 import 'package:currencyconverter_app/domain/model/currency_type/currency_type.dart';
 
-import '../../domain/model/currency/currency_model.dart';
-import '../../domain/use_case/get_currency_use_case.dart';
+import '../../domain/use_case/get_currency_use_case_impl.dart';
 
 class HomeController {
   HomeController(
@@ -10,15 +10,13 @@ class HomeController {
 
   final GetCurrencyUseCaseImpl getCurrencyUseCase;
 
-  Future<CurrencyModel> getCurrency(
+  Future<CurrencyResult> getCurrency(
     double value,
     CurrencyType from,
-    CurrencyType to,
   ) async {
     final currency = await getCurrencyUseCase.getCurrency(
       value,
       from,
-      to,
     );
     return currency;
   }

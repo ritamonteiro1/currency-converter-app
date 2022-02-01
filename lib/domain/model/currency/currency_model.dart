@@ -6,5 +6,4 @@ class CurrencyModel {
 
   double dollar;
   double euro;
-  late double real;
 }

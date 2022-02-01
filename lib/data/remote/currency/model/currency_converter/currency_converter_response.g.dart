@@ -9,14 +9,14 @@ part of 'currency_converter_response.dart';
 CurrencyConverterResponse _$CurrencyConverterResponseFromJson(
     Map<String, dynamic> json) {
   return CurrencyConverterResponse(
-    result: json['result'] == null
+    results: json['results'] == null
         ? null
-        : ResultResponse.fromJson(json['result'] as Map<String, dynamic>),
+        : ResultResponse.fromJson(json['results'] as Map<String, dynamic>),
   );
 }
 
 Map<String, dynamic> _$CurrencyConverterResponseToJson(
         CurrencyConverterResponse instance) =>
     <String, dynamic>{
-      'result': instance.result,
+      'results': instance.results,
     };

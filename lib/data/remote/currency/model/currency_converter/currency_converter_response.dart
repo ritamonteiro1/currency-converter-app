@@ -6,13 +6,13 @@ part 'currency_converter_response.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CurrencyConverterResponse {
   CurrencyConverterResponse({
-    required this.result,
+    required this.results,
   });
 
   factory CurrencyConverterResponse.fromJson(Map<String, dynamic> json) =>
       _$CurrencyConverterResponseFromJson(json);
 
-  final ResultResponse? result;
+  final ResultResponse? results;
 
   Map<String, dynamic> toJson() => _$CurrencyConverterResponseToJson(this);
 }
