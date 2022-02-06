@@ -28,9 +28,9 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       case CurrencyType.real:
         return typedValue;
       case CurrencyType.dollar:
-        return typedValue / currencyModel.dollarInReal;
+        return typedValue * currencyModel.dollarInReal;
       case CurrencyType.euro:
-        return typedValue / currencyModel.euroInReal;
+        return typedValue * currencyModel.euroInReal;
     }
   }
 
@@ -38,7 +38,7 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
-        return typedValue * currencyModel.dollarInReal;
+        return typedValue / currencyModel.dollarInReal;
       case CurrencyType.dollar:
         return typedValue;
       case CurrencyType.euro:
@@ -52,7 +52,7 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
-        return typedValue * currencyModel.euroInReal;
+        return typedValue / currencyModel.euroInReal;
       case CurrencyType.dollar:
         return typedValue *
             currencyModel.euroInReal /

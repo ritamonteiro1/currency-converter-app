@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 typedef OnChanged = void Function(double value);
 
@@ -30,9 +31,7 @@ class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
           widget.onChanged(double.parse(value));
         },
         controller: widget.textEditingController,
-        keyboardType: const TextInputType.numberWithOptions(
-          decimal: true,
-        ),
+        keyboardType: TextInputType.number,
         style: const TextStyle(
           color: Colors.white,
         ),
