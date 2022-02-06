@@ -8,12 +8,14 @@ class CurrencyCustomTextField extends StatefulWidget {
     required this.prefix,
     required this.onChanged,
     required this.textEditingController,
+    required this.onTap,
     Key? key,
   }) : super(key: key);
   final String labelText;
   final String prefix;
   final OnChanged onChanged;
   final TextEditingController? textEditingController;
+  final Function() onTap;
 
   @override
   State<CurrencyCustomTextField> createState() =>
@@ -23,6 +25,7 @@ class CurrencyCustomTextField extends StatefulWidget {
 class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
   @override
   Widget build(BuildContext context) => TextField(
+        onTap: widget.onTap,
         onChanged: (value) {
           widget.onChanged(double.parse(value));
         },

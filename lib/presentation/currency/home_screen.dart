@@ -103,6 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 50,
                 ),
                 CurrencyCustomTextField(
+                  onTap: () {
+                    _realTextEditingController.clear();
+                  },
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
                   onChanged: (value) {
@@ -114,6 +117,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 35,
                 ),
                 CurrencyCustomTextField(
+                  onTap: () {
+                    _dollarTextEditingController.clear();
+                  },
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
                   onChanged: (value) {
@@ -125,6 +131,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: 35,
                 ),
                 CurrencyCustomTextField(
+                  onTap: () {
+                    _eurTextEditingController.clear();
+                  },
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
                   onChanged: (value) {
@@ -167,7 +176,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         );
                       case HomeState.success:
                         return const Text(
-                          'Sucesso na requisição',
+                          ' ',
                           style: TextStyle(
                             color: Colors.white,
                           ),

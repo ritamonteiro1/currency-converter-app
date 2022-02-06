@@ -14,9 +14,14 @@ class CurrencyRemoteDataSourceImpl implements CurrencyRemoteDataSource {
 
   final Dio _dio;
   static const _baseUrl = 'https://api.hgbrasil.com/finance?format=json';
+  CurrencyModel? _cachedCurrencyModel;
 
   @override
   Future<CurrencyModel> getCurrency() async {
+    if (_cachedCurrencyModel != null) {
+      return _cachedCurrencyModel!;
+    }
+
     _dio.interceptors.add(LogInterceptor(responseBody: true));
     try {
       final response = await _dio.get(_baseUrl);
@@ -26,6 +31,7 @@ class CurrencyRemoteDataSourceImpl implements CurrencyRemoteDataSource {
       final currencyResponse = resultResponse?.currencies;
       final currencyModel = currencyResponse?.toCurrencyModel();
       if (currencyModel != null) {
+        _cachedCurrencyModel = currencyModel;
         return currencyModel;
       } else {
         throw NullResponseException();
