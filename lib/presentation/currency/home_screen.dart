@@ -1,24 +1,37 @@
-import '../../domain/model/currency_result/currency_result.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants/constant_images.dart';
-import '../../data/remote/currency/data_source/currency_remote_data_source.dart';
-import '../../data/remote/currency/data_source/currency_remote_data_source_impl.dart';
+import '../../domain/model/currency_result/currency_result.dart';
 import '../../domain/model/currency_type/currency_type.dart';
-import '../../domain/repository/currency/currency_repository.dart';
-import '../../domain/repository/currency/currency_repository_impl.dart';
 import '../../domain/use_case/get_currency_use_case.dart';
-import '../../domain/use_case/get_currency_use_case_impl.dart';
 import '../../generated/l10n.dart';
 import 'currency_custom_text_field.dart';
 import 'home_state.dart';
 import 'home_store.dart';
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({
+    required this.homeStore,
+    Key? key,
+  }) : super(key: key);
+  final HomeStore homeStore;
+
+  static Widget create(BuildContext context) =>
+      ProxyProvider<GetCurrencyUseCase, HomeStore>(
+        update: (context, getCurrencyUseCase, homeStore) =>
+            homeStore ??
+            HomeStore(
+              getCurrencyUseCase,
+            ),
+        child: Consumer<HomeStore>(
+          builder: (context, homeStore, _) => HomeScreen(
+            homeStore: homeStore,
+          ),
+        ),
+      );
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -28,11 +41,6 @@ class _HomeScreenState extends State<HomeScreen> {
   late TextEditingController _dollarTextEditingController;
   late TextEditingController _eurTextEditingController;
   late TextEditingController _realTextEditingController;
-
-  late CurrencyRemoteDataSource currencyRemoteDataSource;
-  late CurrencyRepository currencyRepository;
-  late GetCurrencyUseCase getCurrencyUseCase;
-  late HomeStore homeStore;
   late ReactionDisposer reactionDisposer;
 
   @override
@@ -41,19 +49,13 @@ class _HomeScreenState extends State<HomeScreen> {
     _dollarTextEditingController = TextEditingController();
     _eurTextEditingController = TextEditingController();
     _realTextEditingController = TextEditingController();
-    final dio = Dio();
-    dio.interceptors.add(LogInterceptor(responseBody: true));
-    currencyRemoteDataSource = CurrencyRemoteDataSourceImpl(dio);
-    currencyRepository = CurrencyRepositoryImpl(currencyRemoteDataSource);
-    getCurrencyUseCase = GetCurrencyUseCaseImpl(currencyRepository);
-    homeStore = HomeStore(getCurrencyUseCase);
   }
 
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
     reactionDisposer =
-        reaction((_) => homeStore.currencyResult, (currencyResult) {
+        reaction((_) => widget.homeStore.currencyResult, (currencyResult) {
       if (currencyResult != null && currencyResult is CurrencyResult) {
         _realTextEditingController.text =
             currencyResult.real.toStringAsFixed(2);
@@ -104,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
                   onChanged: (value) {
-                    homeStore.getCurrency(value, CurrencyType.real);
+                    widget.homeStore.getCurrency(value, CurrencyType.real);
                   },
                   textEditingController: _realTextEditingController,
                 ),
@@ -115,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
                   onChanged: (value) {
-                    homeStore.getCurrency(value, CurrencyType.dollar);
+                    widget.homeStore.getCurrency(value, CurrencyType.dollar);
                   },
                   textEditingController: _dollarTextEditingController,
                 ),
@@ -126,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
                   onChanged: (value) {
-                    homeStore.getCurrency(value, CurrencyType.euro);
+                    widget.homeStore.getCurrency(value, CurrencyType.euro);
                   },
                   textEditingController: _eurTextEditingController,
                 ),
@@ -135,7 +137,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Observer(
                   builder: (context) {
-                    switch (homeStore.homeState) {
+                    switch (widget.homeStore.homeState) {
                       case HomeState.initial:
                         return const Text(
                           'Digite o valor!',

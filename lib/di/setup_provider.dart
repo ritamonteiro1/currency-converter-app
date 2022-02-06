@@ -15,12 +15,9 @@ List<SingleChildWidget> providers = [
   ...dependentServices,
 ];
 
-Dio dio = Dio();
-
 List<SingleChildWidget> independentServices = [
   Provider.value(value: const MyApp()),
-  Provider.value(
-      value: dio.interceptors.add(LogInterceptor(responseBody: true))),
+  Provider.value(value: Dio()),
 ];
 
 List<SingleChildWidget> dependentServices = [

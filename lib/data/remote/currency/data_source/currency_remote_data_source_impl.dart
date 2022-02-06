@@ -17,6 +17,7 @@ class CurrencyRemoteDataSourceImpl implements CurrencyRemoteDataSource {
 
   @override
   Future<CurrencyModel> getCurrency() async {
+    _dio.interceptors.add(LogInterceptor(responseBody: true));
     try {
       final response = await _dio.get(_baseUrl);
       final currencyConverterResponse =
