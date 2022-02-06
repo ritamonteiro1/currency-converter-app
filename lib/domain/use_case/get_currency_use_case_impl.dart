@@ -30,7 +30,7 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       case CurrencyType.dollar:
         return typedValue / currencyModel.dollarInReal;
       case CurrencyType.euro:
-        return typedValue * currencyModel.euroInReal;
+        return typedValue / currencyModel.euroInReal;
     }
   }
 

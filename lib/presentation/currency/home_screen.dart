@@ -1,3 +1,4 @@
+import '../../domain/model/currency_result/currency_result.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -40,32 +41,35 @@ class _HomeScreenState extends State<HomeScreen> {
     _dollarTextEditingController = TextEditingController();
     _eurTextEditingController = TextEditingController();
     _realTextEditingController = TextEditingController();
-    currencyRemoteDataSource = CurrencyRemoteDataSourceImpl(Dio());
+    final dio = Dio();
+    dio.interceptors.add(LogInterceptor(responseBody: true));
+    currencyRemoteDataSource = CurrencyRemoteDataSourceImpl(dio);
     currencyRepository = CurrencyRepositoryImpl(currencyRemoteDataSource);
     getCurrencyUseCase = GetCurrencyUseCaseImpl(currencyRepository);
     homeStore = HomeStore(getCurrencyUseCase);
   }
 
-  // @override
-  // void didChangeDependencies() {
-  //   super.didChangeDependencies();
-  //   reactionDisposer =
-  //       reaction((_) => homeStore.currencyResult, (currencyResult) {
-  //     if (currencyResult != null && currencyResult is CurrencyResult) {
-  //       _realTextEditingController.text =
-  //           currencyResult.real.toStringAsFixed(2);
-  //       _dollarTextEditingController.text =
-  //           currencyResult.dollar.toStringAsFixed(2);
-  //       _eurTextEditingController.text = currencyResult.eur.toStringAsFixed(2);
-  //     }
-  //   });
-  // }
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    reactionDisposer =
+        reaction((_) => homeStore.currencyResult, (currencyResult) {
+      if (currencyResult != null && currencyResult is CurrencyResult) {
+        _realTextEditingController.text =
+            currencyResult.real.toStringAsFixed(2);
+        _dollarTextEditingController.text =
+            currencyResult.dollar.toStringAsFixed(2);
+        _eurTextEditingController.text = currencyResult.eur.toStringAsFixed(2);
+      }
+    });
+  }
 
   @override
   void dispose() {
     _dollarTextEditingController.dispose();
     _eurTextEditingController.dispose();
     _realTextEditingController.dispose();
+    reactionDisposer();
     super.dispose();
   }
 
@@ -99,8 +103,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
-                  onChanged: (value) =>
-                      homeStore.getCurrency(value, CurrencyType.real),
+                  onChanged: (value) {
+                    homeStore.getCurrency(value, CurrencyType.real);
+                  },
                   textEditingController: _realTextEditingController,
                 ),
                 const SizedBox(
@@ -109,8 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
-                  onChanged: (value) =>
-                      homeStore.getCurrency(value, CurrencyType.dollar),
+                  onChanged: (value) {
+                    homeStore.getCurrency(value, CurrencyType.dollar);
+                  },
                   textEditingController: _dollarTextEditingController,
                 ),
                 const SizedBox(
@@ -119,8 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 CurrencyCustomTextField(
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
-                  onChanged: (value) =>
-                      homeStore.getCurrency(value, CurrencyType.euro),
+                  onChanged: (value) {
+                    homeStore.getCurrency(value, CurrencyType.euro);
+                  },
                   textEditingController: _eurTextEditingController,
                 ),
                 const SizedBox(
