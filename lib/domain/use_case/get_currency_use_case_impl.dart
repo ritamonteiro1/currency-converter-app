@@ -17,8 +17,8 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       double typedValue, CurrencyType currencyType) async {
     final currencyModel = await currencyRepository.getCurrency();
     final real = _calculateReal(typedValue, currencyType, currencyModel);
-    final dollar = calculateDollar(typedValue, currencyType, currencyModel);
-    final eur = calculateEuro(typedValue, currencyType, currencyModel);
+    final dollar = _calculateDollar(typedValue, currencyType, currencyModel);
+    final eur = _calculateEuro(typedValue, currencyType, currencyModel);
     return CurrencyResult(dollar: dollar, real: real, eur: eur);
   }
 
@@ -28,13 +28,13 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
       case CurrencyType.real:
         return typedValue;
       case CurrencyType.dollar:
-        return typedValue * currencyModel.dollarInReal;
+        return typedValue / currencyModel.dollarInReal;
       case CurrencyType.euro:
         return typedValue * currencyModel.euroInReal;
     }
   }
 
-  double calculateDollar(double typedValue, CurrencyType currencyType,
+  double _calculateDollar(double typedValue, CurrencyType currencyType,
       CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:
@@ -48,7 +48,7 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
     }
   }
 
-  double calculateEuro(double typedValue, CurrencyType currencyType,
+  double _calculateEuro(double typedValue, CurrencyType currencyType,
       CurrencyModel currencyModel) {
     switch (currencyType) {
       case CurrencyType.real:

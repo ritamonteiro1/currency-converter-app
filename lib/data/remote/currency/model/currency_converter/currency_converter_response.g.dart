@@ -7,13 +7,12 @@ part of 'currency_converter_response.dart';
 // **************************************************************************
 
 CurrencyConverterResponse _$CurrencyConverterResponseFromJson(
-    Map<String, dynamic> json) {
-  return CurrencyConverterResponse(
-    results: json['results'] == null
-        ? null
-        : ResultResponse.fromJson(json['results'] as Map<String, dynamic>),
-  );
-}
+        Map<String, dynamic> json) =>
+    CurrencyConverterResponse(
+      results: json['results'] == null
+          ? null
+          : ResultResponse.fromJson(json['results'] as Map<String, dynamic>),
+    );
 
 Map<String, dynamic> _$CurrencyConverterResponseToJson(
         CurrencyConverterResponse instance) =>

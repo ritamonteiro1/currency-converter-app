@@ -8,13 +8,11 @@ class CurrencyCustomTextField extends StatefulWidget {
     required this.prefix,
     required this.onChanged,
     required this.textEditingController,
-    this.value,
     Key? key,
   }) : super(key: key);
   final String labelText;
   final String prefix;
   final OnChanged onChanged;
-  final double? value;
   final TextEditingController? textEditingController;
 
   @override

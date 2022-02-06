@@ -6,11 +6,9 @@ part of 'eur_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-EurResponse _$EurResponseFromJson(Map<String, dynamic> json) {
-  return EurResponse(
-    buy: (json['buy'] as num?)?.toDouble(),
-  );
-}
+EurResponse _$EurResponseFromJson(Map<String, dynamic> json) => EurResponse(
+      buy: (json['buy'] as num?)?.toDouble(),
+    );
 
 Map<String, dynamic> _$EurResponseToJson(EurResponse instance) =>
     <String, dynamic>{
