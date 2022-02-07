@@ -1,15 +1,13 @@
-import 'package:currencyconverter_app/presentation/currency/currency_custum_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 import '../../constants/constant_images.dart';
-import '../../domain/model/currency_result/currency_result.dart';
 import '../../domain/model/currency_type/currency_type.dart';
 import '../../domain/use_case/get_currency_use_case.dart';
 import '../../generated/l10n.dart';
 import 'currency_custom_text_field.dart';
+import 'currency_custum_text.dart';
 import 'home_state.dart';
 import 'home_store.dart';
 
@@ -39,43 +37,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late TextEditingController _dollarTextEditingController;
-  late TextEditingController _eurTextEditingController;
-  late TextEditingController _realTextEditingController;
-  late ReactionDisposer reactionDisposer;
-
-  @override
-  void initState() {
-    super.initState();
-    _dollarTextEditingController = TextEditingController();
-    _eurTextEditingController = TextEditingController();
-    _realTextEditingController = TextEditingController();
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    reactionDisposer =
-        reaction((_) => widget.homeStore.currencyResult, (currencyResult) {
-      if (currencyResult != null && currencyResult is CurrencyResult) {
-        _realTextEditingController.text =
-            currencyResult.real.toStringAsFixed(2);
-        _dollarTextEditingController.text =
-            currencyResult.dollar.toStringAsFixed(2);
-        _eurTextEditingController.text = currencyResult.eur.toStringAsFixed(2);
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _dollarTextEditingController.dispose();
-    _eurTextEditingController.dispose();
-    _realTextEditingController.dispose();
-    reactionDisposer();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.black,
@@ -106,42 +67,42 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 CurrencyCustomTextField(
                   onTap: () {
-                    _realTextEditingController.clear();
+                    widget.homeStore.realController?.clear();
                   },
                   prefix: S.of(context).homeScreenRealPrefixTextField,
                   labelText: S.of(context).homeScreenRealLabelTextField,
                   onChanged: (value) {
                     widget.homeStore.getCurrency(value, CurrencyType.real);
                   },
-                  textEditingController: _realTextEditingController,
+                  textEditingController: widget.homeStore.realController,
                 ),
                 const SizedBox(
                   height: 35,
                 ),
                 CurrencyCustomTextField(
                   onTap: () {
-                    _dollarTextEditingController.clear();
+                    widget.homeStore.dollarController?.clear();
                   },
                   prefix: S.of(context).homeScreenDollarsPrefixTextField,
                   labelText: S.of(context).homeScreenDollarsLabelTextField,
                   onChanged: (value) {
                     widget.homeStore.getCurrency(value, CurrencyType.dollar);
                   },
-                  textEditingController: _dollarTextEditingController,
+                  textEditingController: widget.homeStore.dollarController,
                 ),
                 const SizedBox(
                   height: 35,
                 ),
                 CurrencyCustomTextField(
                   onTap: () {
-                    _eurTextEditingController.clear();
+                    widget.homeStore.eurController?.clear();
                   },
                   prefix: S.of(context).homeScreenEurosPrefixTextField,
                   labelText: S.of(context).homeScreenEurosLabelTextField,
                   onChanged: (value) {
                     widget.homeStore.getCurrency(value, CurrencyType.euro);
                   },
-                  textEditingController: _eurTextEditingController,
+                  textEditingController: widget.homeStore.eurController,
                 ),
                 const SizedBox(
                   height: 35,

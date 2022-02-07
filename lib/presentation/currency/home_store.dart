@@ -1,4 +1,4 @@
-import 'package:currencyconverter_app/domain/model/currency_result/currency_result.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
 import '../../domain/exception/generic_error_status_code_exception.dart';
@@ -21,8 +21,11 @@ abstract class _HomeStore with Store {
   @observable
   HomeState homeState = HomeState.initial;
 
-  @observable
-  CurrencyResult? currencyResult;
+  TextEditingController? realController = TextEditingController();
+
+  TextEditingController? dollarController = TextEditingController();
+
+  TextEditingController? eurController = TextEditingController();
 
   @action
   Future<void> getCurrency(double typedValue, CurrencyType currencyType) async {
@@ -32,7 +35,15 @@ abstract class _HomeStore with Store {
         typedValue,
         currencyType,
       );
-      currencyResult = currency;
+      if (currencyType != CurrencyType.euro) {
+        eurController?.text = currency.eur.toStringAsFixed(2);
+      }
+      if (currencyType != CurrencyType.dollar) {
+        dollarController?.text = currency.dollar.toStringAsPrecision(2);
+      }
+      if (currencyType != CurrencyType.real) {
+        realController?.text = currency.real.toStringAsPrecision(2);
+      }
       homeState = HomeState.success;
     } on NullResponseException {
       homeState = HomeState.occurredGenericError;
