@@ -119,6 +119,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter the value`
+  String get homeScreenEnterTheValueText {
+    return Intl.message(
+      'Enter the value',
+      name: 'homeScreenEnterTheValueText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Occurred error. Try again`
+  String get homeScreenOccurredGenericErrorText {
+    return Intl.message(
+      'Occurred error. Try again',
+      name: 'homeScreenOccurredGenericErrorText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Connection fail. Try again`
+  String get homeScreenConnectionFailText {
+    return Intl.message(
+      'Connection fail. Try again',
+      name: 'homeScreenConnectionFailText',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Converted values`
+  String get homeScreenConvertedValuesText {
+    return Intl.message(
+      'Converted values',
+      name: 'homeScreenConvertedValuesText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

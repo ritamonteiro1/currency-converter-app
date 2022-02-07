@@ -6,5 +6,9 @@
   "homeScreenEurosLabelTextField": "Euros",
   "homeScreenRealPrefixTextField": "R$   ",
   "homeScreenDollarsPrefixTextField": "US$   ",
-  "homeScreenEurosPrefixTextField": "€   "
+  "homeScreenEurosPrefixTextField": "€   ",
+  "homeScreenEnterTheValueText": "Enter the value",
+  "homeScreenOccurredGenericErrorText": "Occurred error. Try again",
+  "homeScreenConnectionFailText": "Connection fail. Try again",
+  "homeScreenConvertedValuesText": "Converted values"
 }

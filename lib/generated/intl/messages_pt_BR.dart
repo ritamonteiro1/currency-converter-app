@@ -22,16 +22,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "homeScreenConnectionFailText": MessageLookupByLibrary.simpleMessage(
+            "Falha na conexão. Tente novamente"),
+        "homeScreenConvertedValuesText":
+            MessageLookupByLibrary.simpleMessage("Valores convertidos"),
         "homeScreenCurrencyConverterText":
             MessageLookupByLibrary.simpleMessage("Conversor de moedas"),
         "homeScreenDollarsLabelTextField":
             MessageLookupByLibrary.simpleMessage("Dólares"),
         "homeScreenDollarsPrefixTextField":
             MessageLookupByLibrary.simpleMessage("US\$   "),
+        "homeScreenEnterTheValueText":
+            MessageLookupByLibrary.simpleMessage("Digite o valor"),
         "homeScreenEurosLabelTextField":
             MessageLookupByLibrary.simpleMessage("Euros"),
         "homeScreenEurosPrefixTextField":
             MessageLookupByLibrary.simpleMessage("€   "),
+        "homeScreenOccurredGenericErrorText":
+            MessageLookupByLibrary.simpleMessage(
+                "Ocorreu um erro. Tente novamente"),
         "homeScreenRealLabelTextField":
             MessageLookupByLibrary.simpleMessage("Reais"),
         "homeScreenRealPrefixTextField":

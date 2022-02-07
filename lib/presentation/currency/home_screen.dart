@@ -1,3 +1,4 @@
+import 'package:currencyconverter_app/presentation/currency/currency_custum_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mobx/mobx.dart';
@@ -148,12 +149,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   builder: (context) {
                     switch (widget.homeStore.homeState) {
                       case HomeState.initial:
-                        return const Text(
-                          'Digite o valor!',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        );
+                        return CurrencyCustomText(
+                            text: S.of(context).homeScreenEnterTheValueText);
                       case HomeState.loading:
                         return Container(
                           child: const Center(
@@ -161,26 +158,16 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         );
                       case HomeState.occurredGenericError:
-                        return const Text(
-                          'Ocorreu um erro. Tente novamente',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        );
+                        return CurrencyCustomText(
+                            text: S
+                                .of(context)
+                                .homeScreenOccurredGenericErrorText);
                       case HomeState.occurredNetworkError:
-                        return const Text(
-                          'Falha na conexão. Tente novamente',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        );
+                        return CurrencyCustomText(
+                            text: S.of(context).homeScreenConnectionFailText);
                       case HomeState.success:
-                        return const Text(
-                          'Valores convertidos!',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        );
+                        return CurrencyCustomText(
+                            text: S.of(context).homeScreenConvertedValuesText);
                     }
                   },
                 ),
