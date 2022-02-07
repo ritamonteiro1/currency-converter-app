@@ -8,7 +8,6 @@ part of 'currency_response.dart';
 
 CurrencyResponse _$CurrencyResponseFromJson(Map<String, dynamic> json) =>
     CurrencyResponse(
-      source: json['source'] as String,
       USD: json['USD'] == null
           ? null
           : UsdResponse.fromJson(json['USD'] as Map<String, dynamic>),
@@ -21,5 +20,4 @@ Map<String, dynamic> _$CurrencyResponseToJson(CurrencyResponse instance) =>
     <String, dynamic>{
       'USD': instance.USD,
       'EUR': instance.EUR,
-      'source': instance.source,
     };

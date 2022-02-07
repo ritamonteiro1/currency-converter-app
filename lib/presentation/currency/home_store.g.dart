@@ -24,21 +24,6 @@ mixin _$HomeStore on _HomeStore, Store {
     });
   }
 
-  final _$currencyResultAtom = Atom(name: '_HomeStore.currencyResult');
-
-  @override
-  CurrencyResult? get currencyResult {
-    _$currencyResultAtom.reportRead();
-    return super.currencyResult;
-  }
-
-  @override
-  set currencyResult(CurrencyResult? value) {
-    _$currencyResultAtom.reportWrite(value, super.currencyResult, () {
-      super.currencyResult = value;
-    });
-  }
-
   final _$getCurrencyAsyncAction = AsyncAction('_HomeStore.getCurrency');
 
   @override
@@ -50,8 +35,7 @@ mixin _$HomeStore on _HomeStore, Store {
   @override
   String toString() {
     return '''
-homeState: ${homeState},
-currencyResult: ${currencyResult}
+homeState: ${homeState}
     ''';
   }
 }
