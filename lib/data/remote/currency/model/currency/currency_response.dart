@@ -8,15 +8,17 @@ part 'currency_response.g.dart';
 @JsonSerializable(fieldRename: FieldRename.snake)
 class CurrencyResponse {
   CurrencyResponse({
-    required this.USD,
-    required this.EUR,
+    required this.usd,
+    required this.eur,
   });
 
   factory CurrencyResponse.fromJson(Map<String, dynamic> json) =>
       _$CurrencyResponseFromJson(json);
 
-  final UsdResponse? USD;
-  final EurResponse? EUR;
+  @JsonKey(name: 'USD')
+  final UsdResponse? usd;
+  @JsonKey(name: 'EUR')
+  final EurResponse? eur;
 
   Map<String, dynamic> toJson() => _$CurrencyResponseToJson(this);
 }
