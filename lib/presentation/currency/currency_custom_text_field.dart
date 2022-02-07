@@ -26,6 +26,9 @@ class CurrencyCustomTextField extends StatefulWidget {
 class _CurrencyCustomTextFieldState extends State<CurrencyCustomTextField> {
   @override
   Widget build(BuildContext context) => TextField(
+        inputFormatters: [
+          FilteringTextInputFormatter.digitsOnly,
+        ],
         onTap: widget.onTap,
         onChanged: (value) {
           widget.onChanged(double.parse(value));
