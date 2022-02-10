@@ -3,5 +3,6 @@ enum HomeState {
   loading,
   occurredGenericError,
   occurredNetworkError,
+  invalidCurrencyTypedError,
   success,
 }

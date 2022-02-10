@@ -10,5 +10,6 @@
   "homeScreenEnterTheValueText": "Enter the value",
   "homeScreenOccurredGenericErrorText": "Occurred error. Try again",
   "homeScreenConnectionFailText": "Connection fail. Try again",
-  "homeScreenConvertedValuesText": "Converted values"
+  "homeScreenConvertedValuesText": "Converted values",
+  "homeScreenInvalidCurrencyValueTypedText": "Enter a positive value"
 }

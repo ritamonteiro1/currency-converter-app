@@ -159,6 +159,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Enter a positive value`
+  String get homeScreenInvalidCurrencyValueTypedText {
+    return Intl.message(
+      'Enter a positive value',
+      name: 'homeScreenInvalidCurrencyValueTypedText',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

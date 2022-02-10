@@ -1,3 +1,5 @@
+import '../../domain/exception/invalid_currency_value_typed_exception.dart';
+import '../../domain/model/currency_result/currency_result.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:mobx/mobx.dart';
 
@@ -35,22 +37,45 @@ abstract class _HomeStore with Store {
         typedValue,
         currencyType,
       );
-      if (currencyType != CurrencyType.euro) {
-        eurController?.text = currency.eur.toStringAsFixed(2);
-      }
-      if (currencyType != CurrencyType.dollar) {
-        dollarController?.text = currency.dollar.toStringAsPrecision(2);
-      }
-      if (currencyType != CurrencyType.real) {
-        realController?.text = currency.real.toStringAsPrecision(2);
-      }
+      _setTextEditingControllers(currencyType, currency);
       homeState = HomeState.success;
+    } on InvalidCurrencyValueTypedException {
+      _clearTextEditingControllers(currencyType);
+      homeState = HomeState.invalidCurrencyTypedError;
     } on NullResponseException {
       homeState = HomeState.occurredGenericError;
     } on GenericErrorStatusCodeException {
       homeState = HomeState.occurredGenericError;
     } on Exception {
       homeState = HomeState.occurredNetworkError;
+    }
+  }
+
+  void _setTextEditingControllers(
+      CurrencyType currencyType, CurrencyResult currency) {
+    if (currencyType != CurrencyType.euro) {
+      eurController?.text = currency.eur.toStringAsFixed(2);
+    }
+    if (currencyType != CurrencyType.dollar) {
+      dollarController?.text = currency.dollar.toStringAsPrecision(2);
+    }
+    if (currencyType != CurrencyType.real) {
+      realController?.text = currency.real.toStringAsPrecision(2);
+    }
+  }
+
+  void _clearTextEditingControllers(CurrencyType currencyType) {
+    if (currencyType == CurrencyType.euro) {
+      dollarController?.clear();
+      realController?.clear();
+    }
+    if (currencyType == CurrencyType.dollar) {
+      eurController?.clear();
+      realController?.clear();
+    }
+    if (currencyType == CurrencyType.real) {
+      eurController?.clear();
+      dollarController?.clear();
     }
   }
 }

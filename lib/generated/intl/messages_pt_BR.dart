@@ -38,6 +38,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Euros"),
         "homeScreenEurosPrefixTextField":
             MessageLookupByLibrary.simpleMessage("€   "),
+        "homeScreenInvalidCurrencyValueTypedText":
+            MessageLookupByLibrary.simpleMessage("Digite um valor positivo"),
         "homeScreenOccurredGenericErrorText":
             MessageLookupByLibrary.simpleMessage(
                 "Ocorreu um erro. Tente novamente"),

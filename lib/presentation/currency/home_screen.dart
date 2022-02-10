@@ -130,6 +130,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       case HomeState.success:
                         return CurrencyCustomText(
                             text: S.of(context).homeScreenConvertedValuesText);
+                      case HomeState.invalidCurrencyTypedError:
+                        return CurrencyCustomText(
+                            text: S
+                                .of(context)
+                                .homeScreenInvalidCurrencyValueTypedText);
                     }
                   },
                 ),
