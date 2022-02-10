@@ -2,7 +2,7 @@ import 'package:currencyconverter_app/domain/model/currency_result/currency_resu
 import 'package:currencyconverter_app/domain/model/currency_type/currency_type.dart';
 
 mixin GetCurrencyUseCase {
-  Future<CurrencyResult> getCurrency(
+  Future<CurrencyResult> call(
     double typedValue,
     CurrencyType currencyType,
   );

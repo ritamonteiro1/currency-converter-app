@@ -13,7 +13,7 @@ class GetCurrencyUseCaseImpl implements GetCurrencyUseCase {
   final CurrencyRepository currencyRepository;
 
   @override
-  Future<CurrencyResult> getCurrency(
+  Future<CurrencyResult> call(
       double typedValue, CurrencyType currencyType) async {
     final currencyModel = await currencyRepository.getCurrency();
     final real = _calculateReal(typedValue, currencyType, currencyModel);

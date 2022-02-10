@@ -5,7 +5,7 @@ import 'package:provider/single_child_widget.dart';
 import '../data/remote/currency/data_source/currency_remote_data_source.dart';
 import '../data/remote/currency/data_source/currency_remote_data_source_impl.dart';
 import '../domain/repository/currency/currency_repository.dart';
-import '../domain/repository/currency/currency_repository_impl.dart';
+import '../data/repository_impl/currency_repository_impl.dart';
 import '../domain/use_case/get_currency_use_case.dart';
 import '../domain/use_case/get_currency_use_case_impl.dart';
 import '../main/my_app.dart';

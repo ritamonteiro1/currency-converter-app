@@ -31,7 +31,7 @@ abstract class _HomeStore with Store {
   Future<void> getCurrency(double typedValue, CurrencyType currencyType) async {
     homeState = HomeState.loading;
     try {
-      final currency = await getCurrencyUseCase.getCurrency(
+      final currency = await getCurrencyUseCase.call(
         typedValue,
         currencyType,
       );
